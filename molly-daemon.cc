@@ -54,6 +54,15 @@ int main()
     exit(EXIT_FAILURE);
   }
 
+  // Ignore SIGCHLD and SIGHUP signals
+  signal(SIGCHLD, SIG_IGN);
+  signal(SIGHUP, SIG_IGN);
+  signal(SIGKILL, [](int signo)
+  {
+      syslog(LOG_INFO, "Received %s -- shutting down", strsignal(signo));
+      shutdown = true;
+  });
+
   // Change the file mask
   umask(0);
 
