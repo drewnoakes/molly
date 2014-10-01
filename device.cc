@@ -17,7 +17,7 @@ Device::Device()
 
 Device::~Device()
 {
-  if (_fd != 0)
+  if (_fd != INVALID_FD)
   {
     int res = ::close(_fd);
     if (res != 0)
