@@ -38,9 +38,9 @@ void Device::open(string devicePath)
   if (fd < 0)
   {
     _fd = INVALID_FD;
-    stringstream err;
-    err << "Error opening device: " << strerror(errno);
-    throw MollyError(err.str());
+    stringstream msg;
+    msg << "Error opening device: " << strerror(errno);
+    throw MollyError(msg.str());
   }
 
   _fd = fd;
@@ -68,9 +68,9 @@ DeviceState Device::sample()
 
   if (res < 0)
   {
-    stringstream err;
-    err << "Error writing to device: " << strerror(errno);
-    throw MollyError(err.str());
+    stringstream msg;
+    msg << "Error writing to device: " << strerror(errno);
+    throw MollyError(msg.str());
   }
 
   unsigned char code;
@@ -81,9 +81,9 @@ DeviceState Device::sample()
     if (errno == EAGAIN)
       return DeviceState::Unavailable;
 
-    stringstream err;
-    err << "Error reading from device: " << strerror(errno);
-    throw MollyError(err.str());
+    stringstream msg;
+    msg << "Error reading from device: " << strerror(errno);
+    throw MollyError(msg.str());
   }
 
   switch (code)
@@ -95,9 +95,9 @@ DeviceState Device::sample()
     case (unsigned char)DeviceState::LidOpen:
       return DeviceState::LidOpen;
     default:
-      stringstream err;
-      err << "Unexpected response: " << (int)code;
-      throw MollyError(err.str());
+      stringstream msg;
+      msg << "Unexpected response: " << (int)code;
+      throw MollyError(msg.str());
   }
 }
 
