@@ -2,6 +2,8 @@
 
 Linux tools for the "Big Red Button" USB device manufactured by Dream Cheeky.
 
+![Big Red Button](big-red-button.png)
+
 Allows running arbitrary shell scripts in response to open, close and button press events.
 
 ## Build
