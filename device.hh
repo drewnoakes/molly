@@ -23,7 +23,7 @@ namespace molly
     : _message(message)
     {}
 
-    const char *what() const _GLIBCXX_USE_NOEXCEPT override
+    const char* what() const _GLIBCXX_USE_NOEXCEPT override
     {
       return _message.c_str();
     }
