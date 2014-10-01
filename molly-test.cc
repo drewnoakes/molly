@@ -13,6 +13,8 @@ int main()
 
   DeviceState lastState = DeviceState::Unknown;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
   while (true)
   {
     DeviceState state = device.sample();
@@ -39,4 +41,5 @@ int main()
 
     usleep(20000);
   }
+#pragma clang diagnostic pop
 }
