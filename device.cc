@@ -101,6 +101,13 @@ DeviceState Device::sample()
   }
 }
 
+
+bool Device::isOpen() const
+{
+  // TODO do we have to check whether "errno == EBADF" here if fcntl returns -1?
+  return _fd != INVALID_FD && fcntl(_fd, F_GETFD) != -1;
+}
+
 std::ostream& molly::operator<<(std::ostream& os, DeviceState const& state)
 {
   switch (state)

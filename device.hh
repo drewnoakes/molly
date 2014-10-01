@@ -42,6 +42,8 @@ namespace molly
     void close();
     DeviceState sample();
 
+    bool isOpen() const;
+
   private:
     int _fd;
   };
