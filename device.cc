@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <sstream>
+#include <sys/stat.h>
 
 using namespace molly;
 using namespace std;
@@ -32,6 +33,14 @@ void Device::open(string devicePath)
 {
   if (_fd != INVALID_FD)
     throw MollyError("Device already open");
+
+  struct stat buffer;
+  if (stat(devicePath.c_str(), &buffer) == -1)
+  {
+    stringstream msg;
+    msg << "Device does not exist: " << strerror(errno);
+    throw MollyError(msg.str());
+  }
 
   int fd = ::open(devicePath.c_str(), O_RDWR|O_NONBLOCK);
 
